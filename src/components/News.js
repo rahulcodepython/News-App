@@ -17,9 +17,10 @@ export default function News(props) {
         let data = await fetch(url);
         // props.setProgress(30);
         let parsedData = await data.json()
-        // props.setProgress(70);
+        // props.setProgress(50);
         setArticle(parsedData.articles)
         setDataLength(parsedData.totalResults)
+        // props.setProgress(70);
         setLoading(false)
         // props.setProgress(100);
     };
@@ -37,11 +38,15 @@ export default function News(props) {
         setDataLength(parsedData.totalResults)
     };
 
+    const capitalizeFirst = (str) => {
+        return str.charAt(0).toUpperCase() + str.slice(1);
+    }
+
     return (
         <div>
             <div className="container" style={{ "alignItems": "center" }}>
-                <div className="container text-center my-3 fs-1 fw-bolder">
-                    Top Headlines
+                <div className="container text-center fs-1 fw-bolder" style={{ "marginBottom": '2rem', 'color': props.color }}>
+                    Top Headlines - {capitalizeFirst(props.category)}
                 </div>
                 {loading && <Spinner />}
                 <InfiniteScroll
@@ -54,12 +59,11 @@ export default function News(props) {
                         <div className="row">
                             {article.map((element) => {
                                 return <div className="col-md-3" key={element.url} >
-                                    <NewsItems author={element.author ? element.author : "none"} title={element.title} description={element.description} url={element.url} urlToImage={element.urlToImage} publishedAt={element.publishedAt} />
+                                    <NewsItems author={element.author ? element.author : "none"} title={element.title} description={element.description} url={element.url} urlToImage={element.urlToImage} publishedAt={element.publishedAt} color={props.color} />
                                 </div>
                             })}
                         </div>
                     </div>
-                    {/* {loading && <Spinner />} */}
                 </InfiniteScroll>
             </div>
         </div>
