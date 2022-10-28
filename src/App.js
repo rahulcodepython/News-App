@@ -10,7 +10,7 @@ import {
 
 export default function App() {
 
-    const apikey = '868926d25a164397820fe218e231a31e'
+    const apikey = 'fc481f0107cc45ac9625df1080ddf724'
 
     const [theme, setTheme] = useState("light");
     const [fontColor, setFontColor] = useState("black");
